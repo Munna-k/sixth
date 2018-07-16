@@ -132,6 +132,35 @@
               <finalName>SpringMVCHibernateCRUD</finalName>
               <plugins>
               <plugin>
+		      
+		      <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <configuration>
+                            <skip>true</skip>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>deploy-node-modules-artifact</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${file}</file>
+                            <groupId>${groupId}</groupId>
+                            <artifactId>${artifactId}</artifactId>
+                            <version>${version}</version>
+                            <packaging>${packaging}</packaging>
+                            <generatePom>true</generatePom>
+                            <repositoryId>${targetRepositoryID}</repositoryId>
+                            <url>${baseNexusURL}/content/repositories/${targetRepositoryID}</url>
+                        </configuration>
+                    </execution>
+                </executions>
+		      
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <includes>
@@ -148,21 +177,7 @@
                 </configuration>
             </plugin>
         </plugins>
-             
-     
-	
-	 <distributionManagement>
-    <repository>
-        <id>central</id>
-        <name>plugins-releases</name>
-        <url>http://serverip:8383/artifactory/plugins-release-local</url>
-    </repository>
-    <snapshotRepository>
-        <id>snapshots</id>
-        <name>plugins-snapshot</name>
-        <url>http://serverip:8383/artifactory/plugins-snapshot-local</url>
-    </snapshotRepository>
-</distributionManagement>
+            
        
          </build>
 </project>
