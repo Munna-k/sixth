@@ -48,6 +48,7 @@ public class EmployeeController {
 	public ModelAndView saveEmployee(@ModelAttribute Employee employee) {
 		if (employee.getId() == 0) { // if employee id is 0 then creating the
 			// employee other updating the employee
+			//UPDATING THE EMPLOYEE DETAILS
 			employeeService.addEmployee(employee);
 		} else {
 			employeeService.updateEmployee(employee);
